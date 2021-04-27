@@ -13,44 +13,37 @@ public class Chat implements MessageMediator {
 
 	@Override
 	public void sendMessage(String message, User user) {
+		
 		try {
-			if (message == "addBot"){
+			if (message == "addBot") {
 	        	   Bot.getInstance();
-	        	   System.out.println("Bot is add to chat");
+	        	   System.out.println("\"Bot\" is add to chat");
 				
-				}
-	           
-	           else if (message == "cat") {
-	        	   
-	        	   Bot.getInstance().postMessage(user.name + " is removed from the chat");
-	        	   Bot.getInstance().postMessage("Cat is not a allowed word");
-	        	   
-	        	   users.remove(user);
-	        	   user.setMediator(null);
-	        	  
-	           }
-			
-			
+			}
 		
 			for(User chatUser: this.users) {
-			// Skip the one who sends the message
-			
-				
+
+				if (message == "cat") {
+	        	   	Bot.getInstance().postMessage(user.name + " is removed from the chat");
+	        	   
+	        	   	users.remove(user);
+	        	   	user.setMediator(null);
+	        	  
+	           		}
+				// Skip the one who sends the message		
 	           
-	            if(chatUser != user) {
-				chatUser.receive(message);
-	           }
-				}
+	            		else if(chatUser != user) {
+				    chatUser.receive(message);
+	           		}
+			}
 			
 		}
-		catch(Exception e)
-  	   
-    	   {
-    		   Bot.getInstance().postMessage(user.name + " is removed from the chat");
-    	   }
-				
-		   
-	           }
+		
+		catch(Exception e) {
+    		
+    		   Bot.getInstance().postMessage("\"Cat\" is not a allowed word");
+    	   	}   
+}
 		
 
 	@Override
